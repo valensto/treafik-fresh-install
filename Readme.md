@@ -37,15 +37,23 @@
 ```
 ##########################################
 
+## Install requirements
+```
+sudo apt-get -y install make -y
+sudo apt-get install apache2-utils -y
+```
 
 ## Before run project
 ```
 cp ./.env.exemple ./.env
 cp ./traefik/conf/traefik.exemple ./traefik/conf/traefik.toml
-
-sudo apt-get -y install make
-make -e user=toto basic-auth-pwd
 ```
+
+## Init basic auth
+```
+make -e user=john basic-auth-pwd
+```
+> replace value of TRAEFIK_BASIC_AUTH key in your .env
 
 ## Before run project
 Edit your `.env` with your own information
