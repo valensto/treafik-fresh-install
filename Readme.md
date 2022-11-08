@@ -1,7 +1,19 @@
 # TRAEFIK RASPBERRY FRESH INSTALL
 
+### Installation pre-requis
+
+* [Install zsh and oh my zsh (Optional)](https://les-enovateurs.com/oh-my-zsh-installation-rapide-linux)
+
+* [Install docker](https://www.framboise314.fr/installer-docker-sur-raspberry-pi/)
+
+* Reboot your raspi
+```
+sudo shutdown -r now
+```
+
+##########################################
+
 ### Configuration Examples
-* traefik config
 ```toml
 [api]
   dashboard = true
