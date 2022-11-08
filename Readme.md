@@ -96,7 +96,7 @@ Edit your `./traefik/conf/traefik.toml` with your own information
 
 ## Run traefik
 ```
-make all
+make traefik
 ```
 
 ### Help
