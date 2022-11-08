@@ -1,14 +1,36 @@
 # TRAEFIK RASPBERRY FRESH INSTALL
 
-### Installation pre-requis
+### Update
 
-* [Install zsh and oh my zsh (Optional)](https://les-enovateurs.com/oh-my-zsh-installation-rapide-linux)
-
-* [Install docker](https://www.framboise314.fr/installer-docker-sur-raspberry-pi/)
-
-* Reboot your raspi
+```sh
+sudo apt update
+sudo apt upgrade
 ```
+
+### Installation ZSH && Oh My ZSH (option)
+```sh
+sudo apt install zsh
+zsh --version
+chsh -s $(which zsh)
+sudo apt install git
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+```
+
+### Installation Docker
+```sh
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+#### replace pi with your user
+```sh
+sudo usermod -aG docker pi
 sudo shutdown -r now
+```
+
+#### test docker
+```sh
+docker run hello-world
 ```
 
 ##########################################
