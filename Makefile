@@ -30,7 +30,6 @@ basic-auth-pwd:
 down:
 	@echo [ teardown all containers... ]
 	docker compose -f traefik/docker-compose.yml down
-	docker compose -f caddy/docker-compose.yml down
 	@echo $(SUCCESS)
 
 .PHONY: --traefik-network
