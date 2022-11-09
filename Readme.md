@@ -74,7 +74,7 @@ make -e user=john basic-auth-pwd
 
 ## Before run project
 Edit your `.env` with your own information
-Edit your `./traefik/conf/traefik.toml` with your own information
+Edit your `./traefik/conf/traefik.yml` with your own information
 
 
 ## Run traefik
