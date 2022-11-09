@@ -43,27 +43,12 @@ docker run hello-world
 make help
 ```
 
-##########################################
-
-## CADDY
-
-## Before run project
-cp ./.env.exemple ./.env
-Edit your `.env` with your own information
-
-
-## Run Caddy
-```
-make caddy
-```
-
-##########################################
-
 ## TRAEFIK
 
 ## Install requirements
 ```
 sudo apt-get install apache2-utils -y
+touch ./conf/acme.json && chmod 600 ./conf/acme.json
 ```
 
 ## Before run project
