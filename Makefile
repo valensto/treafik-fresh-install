@@ -23,7 +23,7 @@ basic-auth-pwd:
 ## Stop and remove all containers
 down:
 	@echo [ teardown all containers... ]
-	docker-compose down
+	docker-compose -f traefik/docker-compose.yml down
 	@echo $(SUCCESS)
 
 .PHONY: --traefik-network
