@@ -54,7 +54,7 @@ touch ./conf/acme.json && chmod 600 ./conf/acme.json
 ## Before run project
 ```
 cp ./.env.exemple ./.env
-cp ./traefik/conf/traefik.exemple ./traefik/conf/traefik.toml
+cp ./traefik/conf/traefik.exemple ./traefik/conf/traefik.yml
 ```
 
 ## Init basic auth
