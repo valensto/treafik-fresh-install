@@ -10,9 +10,15 @@ user ?= admin
 
 .PHONY: traefik
 ## Run traefik container with docker-compose file in traefik directory
-traefik: --traefik-network
+traefik: --traefik-network down
 	@echo [ starting api... ] && \
 	docker compose -f traefik/docker-compose.yml up -d traefik portainer netdata
+
+.PHONY: caddy
+## Run caddy container with docker-compose file in caddy directory
+caddy: --caddy-network down
+	@echo [ starting api... ] && \
+	docker compose -f caddy/docker-compose.yml up -d caddy portainer netdata
 
 .PHONY: basic-auth-pwd
 ## Generate basic auth password and user (default admin) Usage: make -e user=john basic-auth-pwd
@@ -31,6 +37,14 @@ down:
 ifeq (,$(findstring traefik-public,$(NETWORKS)))
 	@echo [ creating traefik network... ]
 	docker network create traefik-public
+	@echo $(SUCCESS)
+endif
+
+.PHONY: --caddy-network
+--caddy-network:
+ifeq (,$(findstring caddy-public,$(NETWORKS)))
+	@echo [ creating caddy network... ]
+	docker network create caddy-public
 	@echo $(SUCCESS)
 endif
 
