@@ -1,5 +1,7 @@
 *acme.json
 *traefik.toml
+*traefik.yml
+*traefik.yaml
 .env
 
 .vscode/*
