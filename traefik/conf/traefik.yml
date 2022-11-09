@@ -22,7 +22,7 @@ entryPoints:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: "your@email.com"
+      email: "v.e.brochard@gmail.com"
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
       storage: "acme.json"
       httpChallenge:

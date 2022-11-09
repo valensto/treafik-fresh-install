@@ -8,7 +8,7 @@ services:
       - ${TRAEFIK_SECURE_PORT}:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./conf/traefik.toml:/etc/traefik/traefik.toml
+      - ./conf/traefik.yml:/etc/traefik/traefik.yml
       - ./conf/acme.json:/acme.json
     labels:
       - "traefik.enable=true"
@@ -20,6 +20,7 @@ services:
       - "traefik.http.middlewares.strip-www.redirectregex.regex=^https?://(www\\.)(.+)"
       - "traefik.http.middlewares.strip-www.redirectregex.replacement=https://$${2}"
       - "traefik.http.middlewares.strip-www.redirectregex.permanent=true"
+      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
     networks:
       - traefik-public
 
@@ -41,6 +42,7 @@ services:
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_TRAEFIK_HOST}`)"
       - "traefik.http.services.portainer.loadbalancer.server.port=${PORTAINER_LOADBALANCER_PORT}"
+      - "traefik.http.routers.portainer.tls.certresolver=letsencrypt"
 
   netdata:
     image: netdata/netdata
