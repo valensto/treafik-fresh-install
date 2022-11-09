@@ -46,6 +46,15 @@ make help
 ## TRAEFIK
 
 ## Install requirements
+
+### Auto Install
+
+```
+./script/init.sh
+```
+
+### Manual Install
+
 ```
 sudo apt-get install apache2-utils -y
 touch ./traefik/conf/acme.json && chmod 600 ./traefik/conf/acme.json

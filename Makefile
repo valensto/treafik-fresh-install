@@ -23,7 +23,7 @@ caddy: --caddy-network down
 .PHONY: basic-auth-pwd
 ## Generate basic auth password and user (default admin) Usage: make -e user=john basic-auth-pwd
 basic-auth-pwd:
-	@./htpasswd.sh $(user)
+	@./scripts/htpasswd.sh $(user)
 
 .PHONY: down
 ## Stop and remove all containers
