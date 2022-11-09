@@ -6,19 +6,10 @@ services:
     ports:
       - ${PROXY_PORT?80}:80
       - ${PROXY_SECURE_PORT?443}:443
-    command:
-      - --entrypoints.web.address=:80
-      - --entrypoints.websecure.address=:443
-      - --providers.docker
-      - --providers.docker.exposedByDefault=false
-      - --api
-      - --api.dashboard=true
-      - --certificatesresolvers.le.acme.email=${PROXY_SSLEMAIL?Variable not set}
-      - --certificatesresolvers.le.acme.storage=./acme.json
-      - --certificatesresolvers.le.acme.tlschallenge=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./conf/acme.json:/acme.json
+      - ./conf/traefik.yml:/traefik.yml
     labels:
       - "traefik.enable=true"
       # Dashboard

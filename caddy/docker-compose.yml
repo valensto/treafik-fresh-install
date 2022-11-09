@@ -30,6 +30,8 @@ services:
     labels:
       caddy: ${PORTAINER_PROXY_HOST}
       caddy.reverse_proxy: "{{upstreams ${PORTAINER_LOADBALANCER_PORT}}}"
+      caddy.0_redir: "/portainer /portainer 301"
+      caddy.header: "Strict-Transport-Security max-age=15552000"
 
   netdata:
     image: netdata/netdata
