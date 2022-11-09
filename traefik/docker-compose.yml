@@ -4,22 +4,36 @@ services:
     image: traefik:${TRAEFIK_VERSION}
     container_name: traefik
     ports:
-      - ${TRAEFIK_PORT}:80
-      - ${TRAEFIK_SECURE_PORT}:443
+      - ${TRAEFIK_PORT?80}:80
+      - ${TRAEFIK_SECURE_PORT?443}:443
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker
+      - --providers.docker.exposedByDefault=false
+      - --api
+      - --certificatesresolvers.le.acme.email=${TRAEFIK_SSLEMAIL?Variable not set}
+      - --certificatesresolvers.le.acme.storage=./acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./conf/traefik.yml:/etc/traefik/traefik.yml
       - ./conf/acme.json:/acme.json
     labels:
       - "traefik.enable=true"
+      # Dashboard
       - "traefik.http.routers.api.rule=Host(`${TRAEFIK_HOST}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
-      - "traefik.http.routers.api.service=api@internal"
-      - "traefik.http.routers.api.entrypoints=websecure"
-      - "traefik.http.routers.api.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_BASIC_AUTH}"
-      - "traefik.http.middlewares.strip-www.redirectregex.regex=^https?://(www\\.)(.+)"
-      - "traefik.http.middlewares.strip-www.redirectregex.replacement=https://$${2}"
-      - "traefik.http.middlewares.strip-www.redirectregex.permanent=true"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.middlewares=authtraefik"
+      - "traefik.http.middlewares.authtraefik.basicauth.users=${TRAEFIK_BASIC_AUTH}"
+      # global redirect to https
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+      # middleware redirect
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
     networks:
       - traefik-public
 
@@ -37,9 +51,10 @@ services:
       - ./portainer-data:/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.tls=true"
-      - "traefik.http.routers.portainer.entrypoints=websecure"
-      - "traefik.http.routers.portainer.rule=Host(`${PORTAINER_TRAEFIK_HOST}`)"
+      - "traefik.http.routers.my-app.rule=Host(`${PORTAINER_TRAEFIK_HOST}`)"
+      - "traefik.http.routers.my-app.entrypoints=websecure"
+      - "traefik.http.routers.my-app.tls=true"
+      - "traefik.http.routers.my-app.tls.certresolver=le"
       - "traefik.http.services.portainer.loadbalancer.server.port=${PORTAINER_LOADBALANCER_PORT}"
 
   netdata:
