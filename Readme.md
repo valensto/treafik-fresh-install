@@ -48,7 +48,7 @@ make help
 ## Install requirements
 ```
 sudo apt-get install apache2-utils -y
-touch ./conf/acme.json && chmod 600 ./conf/acme.json
+touch ./traefik/conf/acme.json && chmod 600 ./traefik/conf/acme.json
 ```
 
 ## Before run project
