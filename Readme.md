@@ -1,4 +1,4 @@
-# TRAEFIK RASPBERRY FRESH INSTALL
+# PROXY RASPBERRY FRESH INSTALL
 
 ### Update
 
@@ -14,6 +14,11 @@ zsh --version
 chsh -s $(which zsh)
 sudo apt install git
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+```
+
+### Installation make
+```
+sudo apt-get -y install make -y
 ```
 
 ### Installation Docker
@@ -33,47 +38,31 @@ sudo shutdown -r now
 docker run hello-world
 ```
 
-##########################################
-
-### Configuration Examples
-```toml
-[api]
-  dashboard = true
-
-[entryPoints]
-  [entryPoints.web]
-    address = ":80"
-    [entryPoints.web.http]
-      [entryPoints.web.http.redirections]
-        [entryPoints.web.http.redirections.entryPoint]
-          to = "websecure"
-          scheme = "https"
-          permanent = true
-
-  [entryPoints.websecure]
-    address = ":443"
-      [entryPoints.websecure.http.tls]
-        certResolver = "default"
-
-[providers]
-  [providers.docker]
-    watch = true
-    exposedByDefault = false
-    network = "web"
-
-[certificatesResolvers]
-  [certificatesResolvers.default]
-    [certificatesResolvers.default.acme]
-      email = "your@email.com"
-      storage = "acme.json"
-      caServer = "https://acme-v01.api.letsencrypt.org/directory"
-    [certificatesResolvers.default.acme.tlsChallenge]
+### Help
 ```
+make help
+```
+
 ##########################################
+
+## CADDY
+
+## Before run project
+cp ./.env.exemple ./.env
+Edit your `.env` with your own information
+
+
+## Run Caddy
+```
+make caddy
+```
+
+##########################################
+
+## TRAEFIK
 
 ## Install requirements
 ```
-sudo apt-get -y install make -y
 sudo apt-get install apache2-utils -y
 ```
 
@@ -99,7 +88,3 @@ Edit your `./traefik/conf/traefik.toml` with your own information
 make traefik
 ```
 
-### Help
-```
-make help
-```
