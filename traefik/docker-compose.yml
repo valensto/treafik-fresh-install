@@ -12,7 +12,7 @@ services:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
       - --api
-      - --dashboard
+      - --api.dashboard=true
       - --certificatesresolvers.le.acme.email=${TRAEFIK_SSLEMAIL?Variable not set}
       - --certificatesresolvers.le.acme.storage=./acme.json
       - --certificatesresolvers.le.acme.tlschallenge=true
