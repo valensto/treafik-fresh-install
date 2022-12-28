@@ -64,6 +64,10 @@ touch ./traefik/conf/acme.json && chmod 600 ./traefik/conf/acme.json
 ```
 cp ./.env.exemple ./.env
 cp ./traefik/conf/traefik.exemple ./traefik/conf/traefik.yml
+
+Edit your `.env` with your own information
+
+Edit your `./traefik/conf/traefik.yml` with your own information
 ```
 
 ## Init basic auth
@@ -71,11 +75,6 @@ cp ./traefik/conf/traefik.exemple ./traefik/conf/traefik.yml
 make -e user=john basic-auth-pwd
 ```
 > replace value of TRAEFIK_BASIC_AUTH key in your .env
-
-## Before run project
-Edit your `.env` with your own information
-Edit your `./traefik/conf/traefik.yml` with your own information
-
 
 ## Run traefik
 ```
