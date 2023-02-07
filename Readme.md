@@ -1,5 +1,7 @@
 # PROXY RASPBERRY FRESH INSTALL
 
+## Docker | ZSH | Make install
+
 ### Update
 
 ```sh

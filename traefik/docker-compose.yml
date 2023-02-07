@@ -20,6 +20,7 @@ services:
       - "traefik.http.routers.api.tls=true"
       - 'traefik.http.middlewares.auth.basicauth.users=${PROXY_BASIC_AUTH}'
       - "traefik.http.routers.api.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.api-https.redirectscheme.scheme=https"
     networks:
       - traefik-public
 
@@ -43,6 +44,7 @@ services:
       - "traefik.http.routers.portainer.service=portainer"
       - "traefik.http.services.portainer.loadbalancer.server.port=${PORTAINER_LOADBALANCER_PORT?9000}"
       - "traefik.http.routers.portainer.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.portainer-https.redirectscheme.scheme=https"
 
   netdata:
     image: netdata/netdata
