@@ -8,9 +8,15 @@ SUCCESS=[ done "\xE2\x9C\x94" ]
 # default arguments
 user ?= admin
 
-.PHONY: traefik
+.PHONY: install
+## Install requirements for traefik and docker-compose file
+install:
+	@echo [ running install... ] && \
+	./scripts/install.sh
+
+.PHONY: all
 ## Run traefik container with docker-compose file in traefik directory
-traefik: --traefik-network down
+all: --traefik-network down
 	@echo [ starting api... ] && \
 	docker compose -f traefik/docker-compose.yml up -d traefik portainer netdata
 

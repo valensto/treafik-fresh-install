@@ -52,7 +52,7 @@ make help
 ### Auto Install
 
 ```
-./script/init.sh
+make install
 ```
 
 ### Manual Install
@@ -80,6 +80,6 @@ make -e user=john basic-auth-pwd
 
 ## Run traefik
 ```
-make traefik
+make all
 ```
 
