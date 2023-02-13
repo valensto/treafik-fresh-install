@@ -40,41 +40,29 @@ sudo shutdown -r now
 docker run hello-world
 ```
 
-### Help
-```
-make help
-```
-
 ## TRAEFIK
 
 ## Install requirements
 
 ### Auto Install
-
 ```
-make install
+bash ./scripts/init.sh
 ```
 
 ### Manual Install
-
 ```
 sudo apt-get install apache2-utils -y
 touch ./traefik/conf/acme.json && chmod 600 ./traefik/conf/acme.json
-```
-
-## Before run project
-```
 cp ./.env.exemple ./.env
 cp ./traefik/conf/traefik.exemple ./traefik/conf/traefik.yml
 
 Edit your `.env` with your own information
-
 Edit your `./traefik/conf/traefik.yml` with your own information
 ```
 
 ## Init basic auth
 ```
-make -e user=john basic-auth-pwd
+make -e user=your_user basic-auth-pwd
 ```
 > replace value of TRAEFIK_BASIC_AUTH key in your .env
 
@@ -83,3 +71,7 @@ make -e user=john basic-auth-pwd
 make all
 ```
 
+### Help
+```
+make help
+```

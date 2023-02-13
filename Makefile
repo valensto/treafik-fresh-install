@@ -11,8 +11,7 @@ user ?= admin
 .PHONY: install
 ## Install requirements for traefik and docker-compose file
 install:
-	@echo [ running install... ] && \
-	./scripts/install.sh
+	@./scripts/install.sh
 
 .PHONY: all
 ## Run traefik container with docker-compose file in traefik directory
